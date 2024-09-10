@@ -1,0 +1,449 @@
+tag,name,keyword,valueRepresentation,valueMultiplicity,retired,id
+"(0008,0005)",Specific Character Set,SpecificCharacterSet,CS,1-n,N,00080005
+"(0008,0012)",Instance Creation Date,InstanceCreationDate,DA,1,N,00080012
+"(0008,0013)",Instance Creation Time,InstanceCreationTime,TM,1,N,00080013
+"(0008,0014)",Instance Creator UID,InstanceCreatorUID,UI,1,N,00080014
+"(0008,0015)",Instance Coercion DateTime,InstanceCoercionDateTime,DT,1,N,00080015
+"(0008,0016)",SOP Class UID,SOPClassUID,UI,1,N,00080016
+"(0008,0018)",SOP Instance UID,SOPInstanceUID,UI,1,N,00080018
+"(0008,001A)",Related General SOP Class UID,RelatedGeneralSOPClassUID,UI,1-n,N,0008001a
+"(0008,001B)",Original Specialized SOP Class UID,OriginalSpecializedSOPClassUID,UI,1,N,0008001b
+"(0008,001C)",Synthetic Data,SyntheticData,CS,1,N,0008001c
+"(0008,0020)",Study Date,StudyDate,DA,1,N,00080020
+"(0008,0021)",Series Date,SeriesDate,DA,1,N,00080021
+"(0008,0030)",Study Time,StudyTime,TM,1,N,00080030
+"(0008,0031)",Series Time,SeriesTime,TM,1,N,00080031
+"(0008,0050)",Accession Number,AccessionNumber,SH,1,N,00080050
+"(0008,0051)",Issuer of Accession Number Sequence,IssuerOfAccessionNumberSequence,SQ,1,N,00080051
+"(0008,0053)",Query/Retrieve View,QueryRetrieveView,CS,1,N,00080053
+"(0008,0054)",Retrieve AE Title,RetrieveAETitle,AE,1-n,N,00080054
+"(0008,0060)",Modality,Modality,CS,1,N,00080060
+"(0008,0070)",Manufacturer,Manufacturer,LO,1,N,00080070
+"(0008,0080)",Institution Name,InstitutionName,LO,1,N,00080080
+"(0008,0081)",Institution Address,InstitutionAddress,ST,1,N,00080081
+"(0008,0082)",Institution Code Sequence,InstitutionCodeSequence,SQ,1,N,00080082
+"(0008,0090)",Referring Physician's Name,ReferringPhysicianName,PN,1,N,00080090
+"(0008,0096)",Referring Physician Identification Sequence,ReferringPhysicianIdentificationSequence,SQ,1,N,00080096
+"(0008,009C)",Consulting Physician's Name,ConsultingPhysicianName,PN,1-n,N,0008009c
+"(0008,009D)",Consulting Physician Identification Sequence,ConsultingPhysicianIdentificationSequence,SQ,1,N,0008009d
+"(0008,0100)",Code Value,CodeValue,SH,1,N,00080100
+"(0008,0102)",Coding Scheme Designator,CodingSchemeDesignator,SH,1,N,00080102
+"(0008,0103)",Coding Scheme Version,CodingSchemeVersion,SH,1,N,00080103
+"(0008,0104)",Code Meaning,CodeMeaning,LO,1,N,00080104
+"(0008,0105)",Mapping Resource,MappingResource,CS,1,N,00080105
+"(0008,0106)",Context Group Version,ContextGroupVersion,DT,1,N,00080106
+"(0008,0107)",Context Group Local Version,ContextGroupLocalVersion,DT,1,N,00080107
+"(0008,0109)",Coding Scheme Resources Sequence,CodingSchemeResourcesSequence,SQ,1,N,00080109
+"(0008,010A)",Coding Scheme URL Type,CodingSchemeURLType,CS,1,N,0008010a
+"(0008,010B)",Context Group Extension Flag,ContextGroupExtensionFlag,CS,1,N,0008010b
+"(0008,010C)",Coding Scheme UID,CodingSchemeUID,UI,1,N,0008010c
+"(0008,010D)",Context Group Extension Creator UID,ContextGroupExtensionCreatorUID,UI,1,N,0008010d
+"(0008,010E)",Coding Scheme URL,CodingSchemeURL,UR,1,N,0008010e
+"(0008,010F)",Context Identifier,ContextIdentifier,CS,1,N,0008010f
+"(0008,0110)",Coding Scheme Identification Sequence,CodingSchemeIdentificationSequence,SQ,1,N,00080110
+"(0008,0112)",Coding Scheme Registry,CodingSchemeRegistry,LO,1,N,00080112
+"(0008,0114)",Coding Scheme External ID,CodingSchemeExternalID,ST,1,N,00080114
+"(0008,0115)",Coding Scheme Name,CodingSchemeName,ST,1,N,00080115
+"(0008,0116)",Coding Scheme Responsible Organization,CodingSchemeResponsibleOrganization,ST,1,N,00080116
+"(0008,0117)",Context UID,ContextUID,UI,1,N,00080117
+"(0008,0118)",Mapping Resource UID,MappingResourceUID,UI,1,N,00080118
+"(0008,0119)",Long Code Value,LongCodeValue,UC,1,N,00080119
+"(0008,0120)",URN Code Value,URNCodeValue,UR,1,N,00080120
+"(0008,0121)",Equivalent Code Sequence,EquivalentCodeSequence,SQ,1,N,00080121
+"(0008,0122)",Mapping Resource Name,MappingResourceName,LO,1,N,00080122
+"(0008,0123)",Context Group Identification Sequence,ContextGroupIdentificationSequence,SQ,1,N,00080123
+"(0008,0124)",Mapping Resource Identification Sequence,MappingResourceIdentificationSequence,SQ,1,N,00080124
+"(0008,0201)",Timezone Offset From UTC,TimezoneOffsetFromUTC,SH,1,N,00080201
+"(0008,0300)",Private Data Element Characteristics Sequence,PrivateDataElementCharacteristicsSequence,SQ,1,N,00080300
+"(0008,0301)",Private Group Reference,PrivateGroupReference,US,1,N,00080301
+"(0008,0302)",Private Creator Reference,PrivateCreatorReference,LO,1,N,00080302
+"(0008,0303)",Block Identifying Information Status,BlockIdentifyingInformationStatus,CS,1,N,00080303
+"(0008,0304)",Nonidentifying Private Elements,NonidentifyingPrivateElements,US,1-n,N,00080304
+"(0008,0306)",Identifying Private Elements,IdentifyingPrivateElements,US,1-n,N,00080306
+"(0008,0305)",Deidentification Action Sequence,DeidentificationActionSequence,SQ,1,N,00080305
+"(0008,0307)",Deidentification Action,DeidentificationAction,CS,1,N,00080307
+"(0008,0308)",Private Data Element,PrivateDataElement,US,1,N,00080308
+"(0008,0309)",Private Data Element Value Multiplicity,PrivateDataElementValueMultiplicity,UL,1-3,N,00080309
+"(0008,030A)",Private Data Element Value Representation,PrivateDataElementValueRepresentation,CS,1,N,0008030a
+"(0008,030B)",Private Data Element Number of Items,PrivateDataElementNumberOfItems,UL,1-2,N,0008030b
+"(0008,030C)",Private Data Element Name,PrivateDataElementName,UC,1,N,0008030c
+"(0008,030D)",Private Data Element Keyword,PrivateDataElementKeyword,UC,1,N,0008030d
+"(0008,030E)",Private Data Element Description,PrivateDataElementDescription,UT,1,N,0008030e
+"(0008,030F)",Private Data Element Encoding,PrivateDataElementEncoding,UT,1,N,0008030f
+"(0008,0310)",Private Data Element Definition Sequence,PrivateDataElementDefinitionSequence,SQ,1,N,00080310
+"(0008,1010)",Station Name,StationName,SH,1,N,00081010
+"(0008,1030)",Study Description,StudyDescription,LO,1,N,00081030
+"(0008,1032)",Procedure Code Sequence,ProcedureCodeSequence,SQ,1,N,00081032
+"(0008,103E)",Series Description,SeriesDescription,LO,1,N,0008103e
+"(0008,103F)",Series Description Code Sequence,SeriesDescriptionCodeSequence,SQ,1,N,0008103f
+"(0008,1040)",Institutional Department Name,InstitutionalDepartmentName,LO,1,N,00081040
+"(0008,1041)",Institutional Department Type Code Sequence,InstitutionalDepartmentTypeCodeSequence,SQ,1,N,00081041
+"(0008,1048)",Physician(s) of Record,PhysiciansOfRecord,PN,1-n,N,00081048
+"(0008,1049)",Physician(s) of Record Identification Sequence,PhysiciansOfRecordIdentificationSequence,SQ,1,N,00081049
+"(0008,1050)",Performing Physician's Name,PerformingPhysicianName,PN,1-n,N,00081050
+"(0008,1052)",Performing Physician Identification Sequence,PerformingPhysicianIdentificationSequence,SQ,1,N,00081052
+"(0008,1060)",Name of Physician(s) Reading Study,NameOfPhysiciansReadingStudy,PN,1-n,N,00081060
+"(0008,1062)",Physician(s) Reading Study Identification Sequence,PhysiciansReadingStudyIdentificationSequence,SQ,1,N,00081062
+"(0008,1070)",Operators' Name,OperatorsName,PN,1-n,N,00081070
+"(0008,1072)",Operator Identification Sequence,OperatorIdentificationSequence,SQ,1,N,00081072
+"(0008,1080)",Admitting Diagnoses Description,AdmittingDiagnosesDescription,LO,1-n,N,00081080
+"(0008,1084)",Admitting Diagnoses Code Sequence,AdmittingDiagnosesCodeSequence,SQ,1,N,00081084
+"(0008,1090)",Manufacturer's Model Name,ManufacturerModelName,LO,1,N,00081090
+"(0008,1110)",Referenced Study Sequence,ReferencedStudySequence,SQ,1,N,00081110
+"(0008,1111)",Referenced Performed Procedure Step Sequence,ReferencedPerformedProcedureStepSequence,SQ,1,N,00081111
+"(0008,1120)",Referenced Patient Sequence,ReferencedPatientSequence,SQ,1,N,00081120
+"(0008,1150)",Referenced SOP Class UID,ReferencedSOPClassUID,UI,1,N,00081150
+"(0008,1155)",Referenced SOP Instance UID,ReferencedSOPInstanceUID,UI,1,N,00081155
+"(0008,1160)",Referenced Frame Number,ReferencedFrameNumber,IS,1-n,N,00081160
+"(0008,1190)",Retrieve URL,RetrieveURL,UR,1,N,00081190
+"(0008,1199)",Referenced SOP Sequence,ReferencedSOPSequence,SQ,1,N,00081199
+"(0008,1250)",Related Series Sequence,RelatedSeriesSequence,SQ,1,N,00081250
+"(0010,0010)",Patient's Name,PatientName,PN,1,N,00100010
+"(0010,0020)",Patient ID,PatientID,LO,1,N,00100020
+"(0010,0021)",Issuer of Patient ID,IssuerOfPatientID,LO,1,N,00100021
+"(0010,0022)",Type of Patient ID,TypeOfPatientID,CS,1,N,00100022
+"(0010,0024)",Issuer of Patient ID Qualifiers Sequence,IssuerOfPatientIDQualifiersSequence,SQ,1,N,00100024
+"(0010,0026)",Source Patient Group Identification Sequence,SourcePatientGroupIdentificationSequence,SQ,1,N,00100026
+"(0010,0027)",Group of Patients Identification Sequence,GroupOfPatientsIdentificationSequence,SQ,1,N,00100027
+"(0010,0028)",Subject Relative Position in Image,SubjectRelativePositionInImage,US,3,N,00100028
+"(0010,0030)",Patient's Birth Date,PatientBirthDate,DA,1,N,00100030
+"(0010,0032)",Patient's Birth Time,PatientBirthTime,TM,1,N,00100032
+"(0010,0033)",Patient's Birth Date in Alternative Calendar,PatientBirthDateInAlternativeCalendar,LO,1,N,00100033
+"(0010,0034)",Patient's Death Date in Alternative Calendar,PatientDeathDateInAlternativeCalendar,LO,1,N,00100034
+"(0010,0035)",Patient's Alternative Calendar,PatientAlternativeCalendar,CS,1,N,00100035
+"(0010,0040)",Patient's Sex,PatientSex,CS,1,N,00100040
+"(0010,0200)",Quality Control Subject,QualityControlSubject,CS,1,N,00100200
+"(0010,0212)",Strain Description,StrainDescription,UC,1,N,00100212
+"(0010,0213)",Strain Nomenclature,StrainNomenclature,LO,1,N,00100213
+"(0010,0214)",Strain Stock Number,StrainStockNumber,LO,1,N,00100214
+"(0010,0215)",Strain Source Registry Code Sequence,StrainSourceRegistryCodeSequence,SQ,1,N,00100215
+"(0010,0216)",Strain Stock Sequence,StrainStockSequence,SQ,1,N,00100216
+"(0010,0217)",Strain Source,StrainSource,LO,1,N,00100217
+"(0010,0218)",Strain Additional Information,StrainAdditionalInformation,UT,1,N,00100218
+"(0010,0219)",Strain Code Sequence,StrainCodeSequence,SQ,1,N,00100219
+"(0010,0221)",Genetic Modifications Sequence,GeneticModificationsSequence,SQ,1,N,00100221
+"(0010,0222)",Genetic Modifications Description,GeneticModificationsDescription,UC,1,N,00100222
+"(0010,0223)",Genetic Modifications Nomenclature,GeneticModificationsNomenclature,LO,1,N,00100223
+"(0010,0229)",Genetic Modifications Code Sequence,GeneticModificationsCodeSequence,SQ,1,N,00100229
+"(0010,1001)",Other Patient Names,OtherPatientNames,PN,1-n,N,00101001
+"(0010,1002)",Other Patient IDs Sequence,OtherPatientIDsSequence,SQ,1,N,00101002
+"(0010,1010)",Patient's Age,PatientAge,AS,1,N,00101010
+"(0010,1020)",Patient's Size,PatientSize,DS,1,N,00101020
+"(0010,1021)",Patient's Size Code Sequence,PatientSizeCodeSequence,SQ,1,N,00101021
+"(0010,1022)",Patient's Body Mass Index,PatientBodyMassIndex,DS,1,N,00101022
+"(0010,1023)",Measured AP Dimension,MeasuredAPDimension,DS,1,N,00101023
+"(0010,1024)",Measured Lateral Dimension,MeasuredLateralDimension,DS,1,N,00101024
+"(0010,1030)",Patient's Weight,PatientWeight,DS,1,N,00101030
+"(0010,1100)",Referenced Patient Photo Sequence,ReferencedPatientPhotoSequence,SQ,1,N,00101100
+"(0010,2000)",Medical Alerts,MedicalAlerts,LO,1-n,N,00102000
+"(0010,2110)",Allergies,Allergies,LO,1-n,N,00102110
+"(0010,2160)",Ethnic Group,EthnicGroup,SH,1,N,00102160
+"(0010,2180)",Occupation,Occupation,SH,1,N,00102180
+"(0010,21A0)",Smoking Status,SmokingStatus,CS,1,N,001021a0
+"(0010,21B0)",Additional Patient History,AdditionalPatientHistory,LT,1,N,001021b0
+"(0010,21C0)",Pregnancy Status,PregnancyStatus,US,1,N,001021c0
+"(0010,21D0)",Last Menstrual Date,LastMenstrualDate,DA,1,N,001021d0
+"(0010,2201)",Patient Species Description,PatientSpeciesDescription,LO,1,N,00102201
+"(0010,2202)",Patient Species Code Sequence,PatientSpeciesCodeSequence,SQ,1,N,00102202
+"(0010,2203)",Patient's Sex Neutered,PatientSexNeutered,CS,1,N,00102203
+"(0010,2210)",Anatomical Orientation Type,AnatomicalOrientationType,CS,1,N,00102210
+"(0010,2292)",Patient Breed Description,PatientBreedDescription,LO,1,N,00102292
+"(0010,2293)",Patient Breed Code Sequence,PatientBreedCodeSequence,SQ,1,N,00102293
+"(0010,2294)",Breed Registration Sequence,BreedRegistrationSequence,SQ,1,N,00102294
+"(0010,2295)",Breed Registration Number,BreedRegistrationNumber,LO,1,N,00102295
+"(0010,2296)",Breed Registry Code Sequence,BreedRegistryCodeSequence,SQ,1,N,00102296
+"(0010,2297)",Responsible Person,ResponsiblePerson,PN,1,N,00102297
+"(0010,2298)",Responsible Person Role,ResponsiblePersonRole,CS,1,N,00102298
+"(0010,2299)",Responsible Organization,ResponsibleOrganization,LO,1,N,00102299
+"(0010,4000)",Patient Comments,PatientComments,LT,1,N,00104000
+"(0012,0010)",Clinical Trial Sponsor Name,ClinicalTrialSponsorName,LO,1,N,00120010
+"(0012,0020)",Clinical Trial Protocol ID,ClinicalTrialProtocolID,LO,1,N,00120020
+"(0012,0021)",Clinical Trial Protocol Name,ClinicalTrialProtocolName,LO,1,N,00120021
+"(0012,0022)",Issuer of Clinical Trial Protocol ID,IssuerOfClinicalTrialProtocolID,LO,1,N,00120022
+"(0012,0023)",Other Clinical Trial Protocol IDs Sequence,OtherClinicalTrialProtocolIDsSequence,SQ,1,N,00120023
+"(0012,0030)",Clinical Trial Site ID,ClinicalTrialSiteID,LO,1,N,00120030
+"(0012,0031)",Clinical Trial Site Name,ClinicalTrialSiteName,LO,1,N,00120031
+"(0012,0032)",Issuer of Clinical Trial Site ID,IssuerOfClinicalTrialSiteID,LO,1,N,00120032
+"(0012,0040)",Clinical Trial Subject ID,ClinicalTrialSubjectID,LO,1,N,00120040
+"(0012,0041)",Issuer of Clinical Trial Subject ID,IssuerOfClinicalTrialSubjectID,LO,1,N,00120041
+"(0012,0042)",Clinical Trial Subject Reading ID,ClinicalTrialSubjectReadingID,LO,1,N,00120042
+"(0012,0043)",Issuer of Clinical Trial Subject Reading ID,IssuerOfClinicalTrialSubjectReadingID,LO,1,N,00120043
+"(0012,0050)",Clinical Trial Time Point ID,ClinicalTrialTimePointID,LO,1,N,00120050
+"(0012,0051)",Clinical Trial Time Point Description,ClinicalTrialTimePointDescription,ST,1,N,00120051
+"(0012,0052)",Longitudinal Temporal Offset from Event,LongitudinalTemporalOffsetFromEvent,FD,1,N,00120052
+"(0012,0053)",Longitudinal Temporal Event Type,LongitudinalTemporalEventType,CS,1,N,00120053
+"(0012,0054)",Clinical Trial Time Point Type Code Sequence,ClinicalTrialTimePointTypeCodeSequence,SQ,1,N,00120054
+"(0012,0055)",Issuer of Clinical Trial Time Point ID,IssuerOfClinicalTrialTimePointID,LO,1,N,00120055
+"(0012,0060)",Clinical Trial Coordinating Center Name,ClinicalTrialCoordinatingCenterName,LO,1,N,00120060
+"(0012,0062)",Patient Identity Removed,PatientIdentityRemoved,CS,1,N,00120062
+"(0012,0063)",De-identification Method,DeidentificationMethod,LO,1-n,N,00120063
+"(0012,0064)",De-identification Method Code Sequence,DeidentificationMethodCodeSequence,SQ,1,N,00120064
+"(0012,0071)",Clinical Trial Series ID,ClinicalTrialSeriesID,LO,1,N,00120071
+"(0012,0072)",Clinical Trial Series Description,ClinicalTrialSeriesDescription,LO,1,N,00120072
+"(0012,0073)",Issuer of Clinical Trial Series ID,IssuerOfClinicalTrialSeriesID,LO,1,N,00120073
+"(0012,0081)",Clinical Trial Protocol Ethics Committee Name,ClinicalTrialProtocolEthicsCommitteeName,LO,1,N,00120081
+"(0012,0082)",Clinical Trial Protocol Ethics Committee Approval Number,ClinicalTrialProtocolEthicsCommitteeApprovalNumber,LO,1,N,00120082
+"(0012,0083)",Consent for Clinical Trial Use Sequence,ConsentForClinicalTrialUseSequence,SQ,1,N,00120083
+"(0012,0084)",Distribution Type,DistributionType,CS,1,N,00120084
+"(0012,0085)",Consent for Distribution Flag,ConsentForDistributionFlag,CS,1,N,00120085
+"(0018,0015)",Body Part Examined,BodyPartExamined,CS,1,N,00180015
+"(0018,1000)",Device Serial Number,DeviceSerialNumber,LO,1,N,00181000
+"(0018,1002)",Device UID,DeviceUID,UI,1,N,00181002
+"(0018,1008)",Gantry ID,GantryID,LO,1,N,00181008
+"(0018,1009)",Unique Device Identifier,UniqueDeviceIdentifier,UT,1,N,00181009
+"(0018,100A)",UDI Sequence,UDISequence,SQ,1,N,0018100a
+"(0018,100B)",Manufacturer's Device Class UID,ManufacturerDeviceClassUID,UI,1-n,N,0018100b
+"(0018,1020)",Software Versions,SoftwareVersions,LO,1-n,N,00181020
+"(0018,1030)",Protocol Name,ProtocolName,LO,1,N,00181030
+"(0018,1050)",Spatial Resolution,SpatialResolution,DS,1,N,00181050
+"(0018,1200)",Date of Last Calibration,DateOfLastCalibration,DA,1-n,N,00181200
+"(0018,1201)",Time of Last Calibration,TimeOfLastCalibration,TM,1-n,N,00181201
+"(0018,1204)",Date of Manufacture,DateOfManufacture,DA,1,N,00181204
+"(0018,1205)",Date of Installation,DateOfInstallation,DA,1,N,00181205
+"(0018,5100)",Patient Position,PatientPosition,CS,1,N,00185100
+"(0018,9004)",Content Qualification,ContentQualification,CS,1,N,00189004
+"(0018,990C)",Referenced Defined Protocol Sequence,ReferencedDefinedProtocolSequence,SQ,1,N,0018990c
+"(0018,990D)",Referenced Performed Protocol Sequence,ReferencedPerformedProtocolSequence,SQ,1,N,0018990d
+"(0018,9938)",Source Acquisition Protocol Element Number,SourceAcquisitionProtocolElementNumber,US,1-n,N,00189938
+"(0018,993A)",Source Reconstruction Protocol Element Number,SourceReconstructionProtocolElementNumber,US,1-n,N,0018993a
+"(0018,A001)",Contributing Equipment Sequence,ContributingEquipmentSequence,SQ,1,N,0018a001
+"(0018,A002)",Contribution DateTime,ContributionDateTime,DT,1,N,0018a002
+"(0018,A003)",Contribution Description,ContributionDescription,ST,1,N,0018a003
+"(0020,000D)",Study Instance UID,StudyInstanceUID,UI,1,N,0020000d
+"(0020,000E)",Series Instance UID,SeriesInstanceUID,UI,1,N,0020000e
+"(0020,0010)",Study ID,StudyID,SH,1,N,00200010
+"(0020,0011)",Series Number,SeriesNumber,IS,1,N,00200011
+"(0020,0013)",Instance Number,InstanceNumber,IS,1,N,00200013
+"(0020,0060)",Laterality,Laterality,CS,1,N,00200060
+"(0020,9172)",Conversion Source Attributes Sequence,ConversionSourceAttributesSequence,SQ,1,N,00209172
+"(0022,0007)",Spherical Lens Power,SphericalLensPower,FL,1,N,00220007
+"(0022,0008)",Cylinder Lens Power,CylinderLensPower,FL,1,N,00220008
+"(0022,0009)",Cylinder Axis,CylinderAxis,FL,1,N,00220009
+"(0022,000B)",Intra Ocular Pressure,IntraOcularPressure,FL,1,N,0022000b
+"(0022,000D)",Pupil Dilated,PupilDilated,CS,1,N,0022000d
+"(0022,000F)",Vertex Distance,VertexDistance,FD,1,N,0022000f
+"(0024,0010)",Visual Field Horizontal Extent,VisualFieldHorizontalExtent,FL,1,N,00240010
+"(0024,0011)",Visual Field Vertical Extent,VisualFieldVerticalExtent,FL,1,N,00240011
+"(0024,0012)",Visual Field Shape,VisualFieldShape,CS,1,N,00240012
+"(0024,0016)",Screening Test Mode Code Sequence,ScreeningTestModeCodeSequence,SQ,1,N,00240016
+"(0024,0018)",Maximum Stimulus Luminance,MaximumStimulusLuminance,FL,1,N,00240018
+"(0024,0020)",Background Luminance,BackgroundLuminance,FL,1,N,00240020
+"(0024,0021)",Stimulus Color Code Sequence,StimulusColorCodeSequence,SQ,1,N,00240021
+"(0024,0024)",Background Illumination Color Code Sequence,BackgroundIlluminationColorCodeSequence,SQ,1,N,00240024
+"(0024,0025)",Stimulus Area,StimulusArea,FL,1,N,00240025
+"(0024,0028)",Stimulus Presentation Time,StimulusPresentationTime,FL,1,N,00240028
+"(0024,0032)",Fixation Sequence,FixationSequence,SQ,1,N,00240032
+"(0024,0033)",Fixation Monitoring Code Sequence,FixationMonitoringCodeSequence,SQ,1,N,00240033
+"(0024,0034)",Visual Field Catch Trial Sequence,VisualFieldCatchTrialSequence,SQ,1,N,00240034
+"(0024,0035)",Fixation Checked Quantity,FixationCheckedQuantity,US,1,N,00240035
+"(0024,0036)",Patient Not Properly Fixated Quantity,PatientNotProperlyFixatedQuantity,US,1,N,00240036
+"(0024,0037)",Presented Visual Stimuli Data Flag,PresentedVisualStimuliDataFlag,CS,1,N,00240037
+"(0024,0038)",Number of Visual Stimuli,NumberOfVisualStimuli,US,1,N,00240038
+"(0024,0039)",Excessive Fixation Losses Data Flag,ExcessiveFixationLossesDataFlag,CS,1,N,00240039
+"(0024,0040)",Excessive Fixation Losses,ExcessiveFixationLosses,CS,1,N,00240040
+"(0024,0042)",Stimuli Retesting Quantity,StimuliRetestingQuantity,US,1,N,00240042
+"(0024,0044)",Comments on Patient's Performance of Visual Field,CommentsOnPatientPerformanceOfVisualField,LT,1,N,00240044
+"(0024,0045)",False Negatives Estimate Flag,FalseNegativesEstimateFlag,CS,1,N,00240045
+"(0024,0046)",False Negatives Estimate,FalseNegativesEstimate,FL,1,N,00240046
+"(0024,0048)",Negative Catch Trials Quantity,NegativeCatchTrialsQuantity,US,1,N,00240048
+"(0024,0050)",False Negatives Quantity,FalseNegativesQuantity,US,1,N,00240050
+"(0024,0051)",Excessive False Negatives Data Flag,ExcessiveFalseNegativesDataFlag,CS,1,N,00240051
+"(0024,0052)",Excessive False Negatives,ExcessiveFalseNegatives,CS,1,N,00240052
+"(0024,0053)",False Positives Estimate Flag,FalsePositivesEstimateFlag,CS,1,N,00240053
+"(0024,0054)",False Positives Estimate,FalsePositivesEstimate,FL,1,N,00240054
+"(0024,0055)",Catch Trials Data Flag,CatchTrialsDataFlag,CS,1,N,00240055
+"(0024,0056)",Positive Catch Trials Quantity,PositiveCatchTrialsQuantity,US,1,N,00240056
+"(0024,0057)",Test Point Normals Data Flag,TestPointNormalsDataFlag,CS,1,N,00240057
+"(0024,0058)",Test Point Normals Sequence,TestPointNormalsSequence,SQ,1,N,00240058
+"(0024,0059)",Global Deviation Probability Normals Flag,GlobalDeviationProbabilityNormalsFlag,CS,1,N,00240059
+"(0024,0060)",False Positives Quantity,FalsePositivesQuantity,US,1,N,00240060
+"(0024,0061)",Excessive False Positives Data Flag,ExcessiveFalsePositivesDataFlag,CS,1,N,00240061
+"(0024,0062)",Excessive False Positives,ExcessiveFalsePositives,CS,1,N,00240062
+"(0024,0063)",Visual Field Test Normals Flag,VisualFieldTestNormalsFlag,CS,1,N,00240063
+"(0024,0064)",Results Normals Sequence,ResultsNormalsSequence,SQ,1,N,00240064
+"(0024,0065)",Age Corrected Sensitivity Deviation Algorithm Sequence,AgeCorrectedSensitivityDeviationAlgorithmSequence,SQ,1,N,00240065
+"(0024,0066)",Global Deviation From Normal,GlobalDeviationFromNormal,FL,1,N,00240066
+"(0024,0067)",Generalized Defect Sensitivity Deviation Algorithm Sequence,GeneralizedDefectSensitivityDeviationAlgorithmSequence,SQ,1,N,00240067
+"(0024,0068)",Localized Deviation From Normal,LocalizedDeviationFromNormal,FL,1,N,00240068
+"(0024,0069)",Patient Reliability Indicator,PatientReliabilityIndicator,LO,1,N,00240069
+"(0024,0070)",Visual Field Mean Sensitivity,VisualFieldMeanSensitivity,FL,1,N,00240070
+"(0024,0071)",Global Deviation Probability,GlobalDeviationProbability,FL,1,N,00240071
+"(0024,0072)",Local Deviation Probability Normals Flag,LocalDeviationProbabilityNormalsFlag,CS,1,N,00240072
+"(0024,0073)",Localized Deviation Probability,LocalizedDeviationProbability,FL,1,N,00240073
+"(0024,0074)",Short Term Fluctuation Calculated,ShortTermFluctuationCalculated,CS,1,N,00240074
+"(0024,0075)",Short Term Fluctuation,ShortTermFluctuation,FL,1,N,00240075
+"(0024,0076)",Short Term Fluctuation Probability Calculated,ShortTermFluctuationProbabilityCalculated,CS,1,N,00240076
+"(0024,0077)",Short Term Fluctuation Probability,ShortTermFluctuationProbability,FL,1,N,00240077
+"(0024,0078)",Corrected Localized Deviation From Normal Calculated,CorrectedLocalizedDeviationFromNormalCalculated,CS,1,N,00240078
+"(0024,0079)",Corrected Localized Deviation From Normal,CorrectedLocalizedDeviationFromNormal,FL,1,N,00240079
+"(0024,0080)",Corrected Localized Deviation From Normal Probability Calculated,CorrectedLocalizedDeviationFromNormalProbabilityCalculated,CS,1,N,00240080
+"(0024,0081)",Corrected Localized Deviation From Normal Probability,CorrectedLocalizedDeviationFromNormalProbability,FL,1,N,00240081
+"(0024,0083)",Global Deviation Probability Sequence,GlobalDeviationProbabilitySequence,SQ,1,N,00240083
+"(0024,0085)",Localized Deviation Probability Sequence,LocalizedDeviationProbabilitySequence,SQ,1,N,00240085
+"(0024,0086)",Foveal Sensitivity Measured,FovealSensitivityMeasured,CS,1,N,00240086
+"(0024,0087)",Foveal Sensitivity,FovealSensitivity,FL,1,N,00240087
+"(0024,0088)",Visual Field Test Duration,VisualFieldTestDuration,FL,1,N,00240088
+"(0024,0089)",Visual Field Test Point Sequence,VisualFieldTestPointSequence,SQ,1,N,00240089
+"(0024,0090)",Visual Field Test Point X-Coordinate,VisualFieldTestPointXCoordinate,FL,1,N,00240090
+"(0024,0091)",Visual Field Test Point Y-Coordinate,VisualFieldTestPointYCoordinate,FL,1,N,00240091
+"(0024,0092)",Age Corrected Sensitivity Deviation Value,AgeCorrectedSensitivityDeviationValue,FL,1,N,00240092
+"(0024,0093)",Stimulus Results,StimulusResults,CS,1,N,00240093
+"(0024,0094)",Sensitivity Value,SensitivityValue,FL,1,N,00240094
+"(0024,0095)",Retest Stimulus Seen,RetestStimulusSeen,CS,1,N,00240095
+"(0024,0096)",Retest Sensitivity Value,RetestSensitivityValue,FL,1,N,00240096
+"(0024,0097)",Visual Field Test Point Normals Sequence,VisualFieldTestPointNormalsSequence,SQ,1,N,00240097
+"(0024,0098)",Quantified Defect,QuantifiedDefect,FL,1,N,00240098
+"(0024,0100)",Age Corrected Sensitivity Deviation Probability Value,AgeCorrectedSensitivityDeviationProbabilityValue,FL,1,N,00240100
+"(0024,0102)",Generalized Defect Corrected Sensitivity Deviation Flag,GeneralizedDefectCorrectedSensitivityDeviationFlag,CS,1,N,00240102
+"(0024,0103)",Generalized Defect Corrected Sensitivity Deviation Value,GeneralizedDefectCorrectedSensitivityDeviationValue,FL,1,N,00240103
+"(0024,0104)",Generalized Defect Corrected Sensitivity Deviation Probability Value,GeneralizedDefectCorrectedSensitivityDeviationProbabilityValue,FL,1,N,00240104
+"(0024,0105)",Minimum Sensitivity Value,MinimumSensitivityValue,FL,1,N,00240105
+"(0024,0106)",Blind Spot Localized,BlindSpotLocalized,CS,1,N,00240106
+"(0024,0107)",Blind Spot X-Coordinate,BlindSpotXCoordinate,FL,1,N,00240107
+"(0024,0108)",Blind Spot Y-Coordinate,BlindSpotYCoordinate,FL,1,N,00240108
+"(0024,0110)",Visual Acuity Measurement Sequence,VisualAcuityMeasurementSequence,SQ,1,N,00240110
+"(0024,0112)",Refractive Parameters Used on Patient Sequence,RefractiveParametersUsedOnPatientSequence,SQ,1,N,00240112
+"(0024,0113)",Measurement Laterality,MeasurementLaterality,CS,1,N,00240113
+"(0024,0114)",Ophthalmic Patient Clinical Information Left Eye Sequence,OphthalmicPatientClinicalInformationLeftEyeSequence,SQ,1,N,00240114
+"(0024,0115)",Ophthalmic Patient Clinical Information Right Eye Sequence,OphthalmicPatientClinicalInformationRightEyeSequence,SQ,1,N,00240115
+"(0024,0117)",Foveal Point Normative Data Flag,FovealPointNormativeDataFlag,CS,1,N,00240117
+"(0024,0118)",Foveal Point Probability Value,FovealPointProbabilityValue,FL,1,N,00240118
+"(0024,0120)",Screening Baseline Measured,ScreeningBaselineMeasured,CS,1,N,00240120
+"(0024,0122)",Screening Baseline Measured Sequence,ScreeningBaselineMeasuredSequence,SQ,1,N,00240122
+"(0024,0124)",Screening Baseline Type,ScreeningBaselineType,CS,1,N,00240124
+"(0024,0126)",Screening Baseline Value,ScreeningBaselineValue,FL,1,N,00240126
+"(0024,0202)",Algorithm Source,AlgorithmSource,LO,1,N,00240202
+"(0024,0306)",Data Set Name,DataSetName,LO,1,N,00240306
+"(0024,0307)",Data Set Version,DataSetVersion,LO,1,N,00240307
+"(0024,0308)",Data Set Source,DataSetSource,LO,1,N,00240308
+"(0024,0309)",Data Set Description,DataSetDescription,LO,1,N,00240309
+"(0024,0317)",Visual Field Test Reliability Global Index Sequence,VisualFieldTestReliabilityGlobalIndexSequence,SQ,1,N,00240317
+"(0024,0320)",Visual Field Global Results Index Sequence,VisualFieldGlobalResultsIndexSequence,SQ,1,N,00240320
+"(0024,0325)",Data Observation Sequence,DataObservationSequence,SQ,1,N,00240325
+"(0024,0338)",Index Normals Flag,IndexNormalsFlag,CS,1,N,00240338
+"(0024,0341)",Index Probability,IndexProbability,FL,1,N,00240341
+"(0024,0344)",Index Probability Sequence,IndexProbabilitySequence,SQ,1,N,00240344
+"(0028,0108)",Smallest Pixel Value in Series,SmallestPixelValueInSeries,US or SS,1,N,00280108
+"(0028,0109)",Largest Pixel Value in Series,LargestPixelValueInSeries,US or SS,1,N,00280109
+"(0028,0120)",Pixel Padding Value,PixelPaddingValue,US or SS,1,N,00280120
+"(0028,0303)",Longitudinal Temporal Information Modified,LongitudinalTemporalInformationModified,CS,1,N,00280303
+"(0032,1033)",Requesting Service,RequestingService,LO,1,N,00321033
+"(0032,1034)",Requesting Service Code Sequence,RequestingServiceCodeSequence,SQ,1,N,00321034
+"(0032,1060)",Requested Procedure Description,RequestedProcedureDescription,LO,1,N,00321060
+"(0032,1064)",Requested Procedure Code Sequence,RequestedProcedureCodeSequence,SQ,1,N,00321064
+"(0032,1066)",Reason for Visit,ReasonForVisit,UT,1,N,00321066
+"(0032,1067)",Reason for Visit Code Sequence,ReasonForVisitCodeSequence,SQ,1,N,00321067
+"(0038,0010)",Admission ID,AdmissionID,LO,1,N,00380010
+"(0038,0014)",Issuer of Admission ID Sequence,IssuerOfAdmissionIDSequence,SQ,1,N,00380014
+"(0038,0060)",Service Episode ID,ServiceEpisodeID,LO,1,N,00380060
+"(0038,0062)",Service Episode Description,ServiceEpisodeDescription,LO,1,N,00380062
+"(0038,0064)",Issuer of Service Episode ID Sequence,IssuerOfServiceEpisodeIDSequence,SQ,1,N,00380064
+"(0038,0500)",Patient State,PatientState,LO,1,N,00380500
+"(0040,0007)",Scheduled Procedure Step Description,ScheduledProcedureStepDescription,LO,1,N,00400007
+"(0040,0008)",Scheduled Protocol Code Sequence,ScheduledProtocolCodeSequence,SQ,1,N,00400008
+"(0040,0009)",Scheduled Procedure Step ID,ScheduledProcedureStepID,SH,1,N,00400009
+"(0040,0031)",Local Namespace Entity ID,LocalNamespaceEntityID,UT,1,N,00400031
+"(0040,0032)",Universal Entity ID,UniversalEntityID,UT,1,N,00400032
+"(0040,0033)",Universal Entity ID Type,UniversalEntityIDType,CS,1,N,00400033
+"(0040,0035)",Identifier Type Code,IdentifierTypeCode,CS,1,N,00400035
+"(0040,0036)",Assigning Facility Sequence,AssigningFacilitySequence,SQ,1,N,00400036
+"(0040,0039)",Assigning Jurisdiction Code Sequence,AssigningJurisdictionCodeSequence,SQ,1,N,00400039
+"(0040,003A)",Assigning Agency or Department Code Sequence,AssigningAgencyOrDepartmentCodeSequence,SQ,1,N,0040003a
+"(0040,0244)",Performed Procedure Step Start Date,PerformedProcedureStepStartDate,DA,1,N,00400244
+"(0040,0245)",Performed Procedure Step Start Time,PerformedProcedureStepStartTime,TM,1,N,00400245
+"(0040,0250)",Performed Procedure Step End Date,PerformedProcedureStepEndDate,DA,1,N,00400250
+"(0040,0251)",Performed Procedure Step End Time,PerformedProcedureStepEndTime,TM,1,N,00400251
+"(0040,0253)",Performed Procedure Step ID,PerformedProcedureStepID,SH,1,N,00400253
+"(0040,0254)",Performed Procedure Step Description,PerformedProcedureStepDescription,LO,1,N,00400254
+"(0040,0260)",Performed Protocol Code Sequence,PerformedProtocolCodeSequence,SQ,1,N,00400260
+"(0040,0275)",Request Attributes Sequence,RequestAttributesSequence,SQ,1,N,00400275
+"(0040,0280)",Comments on the Performed Procedure Step,CommentsOnThePerformedProcedureStep,ST,1,N,00400280
+"(0040,0440)",Protocol Context Sequence,ProtocolContextSequence,SQ,1,N,00400440
+"(0040,0441)",Content Item Modifier Sequence,ContentItemModifierSequence,SQ,1,N,00400441
+"(0040,08EA)",Measurement Units Code Sequence,MeasurementUnitsCodeSequence,SQ,1,N,004008ea
+"(0040,1001)",Requested Procedure ID,RequestedProcedureID,SH,1,N,00401001
+"(0040,1002)",Reason for the Requested Procedure,ReasonForTheRequestedProcedure,LO,1,N,00401002
+"(0040,100A)",Reason for Requested Procedure Code Sequence,ReasonForRequestedProcedureCodeSequence,SQ,1,N,0040100a
+"(0040,1012)",Reason For Performed Procedure Code Sequence,ReasonForPerformedProcedureCodeSequence,SQ,1,N,00401012
+"(0040,1101)",Person Identification Code Sequence,PersonIdentificationCodeSequence,SQ,1,N,00401101
+"(0040,1102)",Person's Address,PersonAddress,ST,1,N,00401102
+"(0040,1103)",Person's Telephone Numbers,PersonTelephoneNumbers,LO,1-n,N,00401103
+"(0040,1104)",Person's Telecom Information,PersonTelecomInformation,LT,1,N,00401104
+"(0040,A032)",Observation DateTime,ObservationDateTime,DT,1,N,0040a032
+"(0040,A033)",Observation Start DateTime,ObservationStartDateTime,DT,1,N,0040a033
+"(0040,A040)",Value Type,ValueType,CS,1,N,0040a040
+"(0040,A043)",Concept Name Code Sequence,ConceptNameCodeSequence,SQ,1,N,0040a043
+"(0040,A0B0)",Referenced Waveform Channels,ReferencedWaveformChannels,US,2-2n,N,0040a0b0
+"(0040,A120)",DateTime,DateTime,DT,1,N,0040a120
+"(0040,A121)",Date,Date,DA,1,N,0040a121
+"(0040,A122)",Time,Time,TM,1,N,0040a122
+"(0040,A123)",Person Name,PersonName,PN,1,N,0040a123
+"(0040,A124)",UID,UID,UI,1,N,0040a124
+"(0040,A160)",Text Value,TextValue,UT,1,N,0040a160
+"(0040,A161)",Floating Point Value,FloatingPointValue,FD,1-n,N,0040a161
+"(0040,A162)",Rational Numerator Value,RationalNumeratorValue,SL,1-n,N,0040a162
+"(0040,A163)",Rational Denominator Value,RationalDenominatorValue,UL,1-n,N,0040a163
+"(0040,A168)",Concept Code Sequence,ConceptCodeSequence,SQ,1,N,0040a168
+"(0040,A170)",Purpose of Reference Code Sequence,PurposeOfReferenceCodeSequence,SQ,1,N,0040a170
+"(0040,A30A)",Numeric Value,NumericValue,DS,1-n,N,0040a30a
+"(0040,A390)",HL7 Structured Document Reference Sequence,HL7StructuredDocumentReferenceSequence,SQ,1,N,0040a390
+"(0040,E001)",HL7 Instance Identifier,HL7InstanceIdentifier,ST,1,N,0040e001
+"(0040,E010)",Retrieve URI,RetrieveURI,UR,1,N,0040e010
+"(0040,E020)",Type of Instances,TypeOfInstances,CS,1,N,0040e020
+"(0040,E021)",DICOM Retrieval Sequence,DICOMRetrievalSequence,SQ,1,N,0040e021
+"(0040,E022)",DICOM Media Retrieval Sequence,DICOMMediaRetrievalSequence,SQ,1,N,0040e022
+"(0040,E023)",WADO Retrieval Sequence,WADORetrievalSequence,SQ,1,N,0040e023
+"(0040,E024)",XDS Retrieval Sequence,XDSRetrievalSequence,SQ,1,N,0040e024
+"(0040,E025)",WADO-RS Retrieval Sequence,WADORSRetrievalSequence,SQ,1,N,0040e025
+"(0040,E030)",Repository Unique ID,RepositoryUniqueID,UI,1,N,0040e030
+"(0040,E031)",Home Community ID,HomeCommunityID,UI,1,N,0040e031
+"(0046,0044)",Pupil Size,PupilSize,FD,1,N,00460044
+"(0046,0135)",Visual Acuity Modifiers,VisualAcuityModifiers,SS,2,N,00460135
+"(0046,0137)",Decimal Visual Acuity,DecimalVisualAcuity,FD,1,N,00460137
+"(0050,0020)",Device Description,DeviceDescription,LO,1,N,00500020
+"(0062,000B)",Referenced Segment Number,ReferencedSegmentNumber,US,1-n,N,0062000b
+"(0066,002F)",Algorithm Family Code Sequence,AlgorithmFamilyCodeSequence,SQ,1,N,0066002f
+"(0066,0030)",Algorithm Name Code Sequence,AlgorithmNameCodeSequence,SQ,1,N,00660030
+"(0066,0031)",Algorithm Version,AlgorithmVersion,LO,1,N,00660031
+"(0066,0032)",Algorithm Parameters,AlgorithmParameters,LT,1,N,00660032
+"(0066,0036)",Algorithm Name,AlgorithmName,LO,1,N,00660036
+"(0072,0026)",Selector Attribute,SelectorAttribute,AT,1,N,00720026
+"(0072,0028)",Selector Value Number,SelectorValueNumber,US,1,N,00720028
+"(0072,0052)",Selector Sequence Pointer,SelectorSequencePointer,AT,1-n,N,00720052
+"(0072,0054)",Selector Sequence Pointer Private Creator,SelectorSequencePointerPrivateCreator,LO,1-n,N,00720054
+"(0072,0056)",Selector Attribute Private Creator,SelectorAttributePrivateCreator,LO,1,N,00720056
+"(0074,1057)",Selector Sequence Pointer Items,SelectorSequencePointerItems,IS,1-n,N,00741057
+"(0088,0130)",Storage Media File-set ID,StorageMediaFileSetID,SH,1,N,00880130
+"(0088,0140)",Storage Media File-set UID,StorageMediaFileSetUID,UI,1,N,00880140
+"(0100,0410)",SOP Instance Status,SOPInstanceStatus,CS,1,N,01000410
+"(0100,0420)",SOP Authorization DateTime,SOPAuthorizationDateTime,DT,1,N,01000420
+"(0100,0424)",SOP Authorization Comment,SOPAuthorizationComment,LT,1,N,01000424
+"(0100,0426)",Authorization Equipment Certification Number,AuthorizationEquipmentCertificationNumber,LO,1,N,01000426
+"(0400,0005)",MAC ID Number,MACIDNumber,US,1,N,04000005
+"(0400,0010)",MAC Calculation Transfer Syntax UID,MACCalculationTransferSyntaxUID,UI,1,N,04000010
+"(0400,0015)",MAC Algorithm,MACAlgorithm,CS,1,N,04000015
+"(0400,0020)",Data Elements Signed,DataElementsSigned,AT,1-n,N,04000020
+"(0400,0100)",Digital Signature UID,DigitalSignatureUID,UI,1,N,04000100
+"(0400,0105)",Digital Signature DateTime,DigitalSignatureDateTime,DT,1,N,04000105
+"(0400,0110)",Certificate Type,CertificateType,CS,1,N,04000110
+"(0400,0115)",Certificate of Signer,CertificateOfSigner,OB,1,N,04000115
+"(0400,0120)",Signature,Signature,OB,1,N,04000120
+"(0400,0305)",Certified Timestamp Type,CertifiedTimestampType,CS,1,N,04000305
+"(0400,0310)",Certified Timestamp,CertifiedTimestamp,OB,1,N,04000310
+"(0400,0401)",Digital Signature Purpose Code Sequence,DigitalSignaturePurposeCodeSequence,SQ,1,N,04000401
+"(0400,0500)",Encrypted Attributes Sequence,EncryptedAttributesSequence,SQ,1,N,04000500
+"(0400,0510)",Encrypted Content Transfer Syntax UID,EncryptedContentTransferSyntaxUID,UI,1,N,04000510
+"(0400,0520)",Encrypted Content,EncryptedContent,OB,1,N,04000520
+"(0400,0550)",Modified Attributes Sequence,ModifiedAttributesSequence,SQ,1,N,04000550
+"(0400,0551)",Nonconforming Modified Attributes Sequence,NonconformingModifiedAttributesSequence,SQ,1,N,04000551
+"(0400,0552)",Nonconforming Data Element Value,NonconformingDataElementValue,OB,1,N,04000552
+"(0400,0561)",Original Attributes Sequence,OriginalAttributesSequence,SQ,1,N,04000561
+"(0400,0562)",Attribute Modification DateTime,AttributeModificationDateTime,DT,1,N,04000562
+"(0400,0563)",Modifying System,ModifyingSystem,LO,1,N,04000563
+"(0400,0564)",Source of Previous Values,SourceOfPreviousValues,LO,1,N,04000564
+"(0400,0565)",Reason for the Attribute Modification,ReasonForTheAttributeModification,CS,1,N,04000565
+"(0400,0600)",Instance Origin Status,InstanceOriginStatus,CS,1,N,04000600
+"(2200,0005)",Barcode Value,BarcodeValue,LT,1,N,22000005
+"(300A,0700)",Treatment Session UID,TreatmentSessionUID,UI,1,N,300a0700
+"(4FFE,0001)",MAC Parameters Sequence,MACParametersSequence,SQ,1,N,4ffe0001
+"(FFFA,FFFA)",Digital Signatures Sequence,DigitalSignaturesSequence,SQ,1,N,fffafffa

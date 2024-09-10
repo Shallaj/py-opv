@@ -1,0 +1,22 @@
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyopv"
+version = "0.1.0"
+description = "This package provides a set of tools for chekcing OPV DICOM compliance and converting OPV DICOM to csv or json."
+readme = "README.md"
+authors = [
+    { name = "Shahin Hallj", email = "shallaj@health.ucsd.edu" }
+]
+license = { text = "MIT" }  # Replace with your license text if different
+dependencies = [
+    pydicom==2.3.1
+    numpy==1.24.3
+    pandas==1.5.3
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Shallaj/py_opv"
