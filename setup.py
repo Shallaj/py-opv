@@ -8,7 +8,7 @@ setup(
     description='This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/Shallaj/py_opv',
+    url='https://github.com/Shallaj/py-opv',
     packages=find_packages(),
     install_requires=[
         'pydicom',

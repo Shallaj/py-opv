@@ -25,5 +25,5 @@ dependencies = [
 requires-python = ">=3.6"
 
 [project.urls]
-Homepage = "https://github.com/Shallaj/py_opv"
-Source = "https://github.com/Shallaj/py_opv"
+Homepage = "https://github.com/Shallaj/py-opv"
+Source = "https://github.com/Shallaj/py-opv"
