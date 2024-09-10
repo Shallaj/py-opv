@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Use the latest version
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5  # Use the latest version
         with:
-          python-version: '3.x'  # Specify your Python version
+          python-version: '>=3.6'  # Specify Python version greater than or equal to 3.6
 
       - name: Install dependencies
         run: |
@@ -29,6 +29,6 @@ jobs:
 
       - name: Publish to PyPI
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}  
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}  
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}  # Add this to your repository secrets
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}  # Add this to your repository secrets
         run: twine upload dist/*
