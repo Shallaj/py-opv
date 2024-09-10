@@ -30,12 +30,7 @@ class OPVDicom:
         for _, row in self.nema_opv_dicom.iterrows():
             try:
                 # Convert tag to a format that can be used to access elements directly
-                tag_str = row['tag'].strip('()')
-                tag_group, tag_element = tag_str.split(',')
-                
-                # Ensure tag is stripped of any spaces and convert to integer
-                tag_tuple = (int(tag_group.strip(), 16), int(tag_element.strip(), 16))
-
+                tag_tuple = row['tag']
                 # Access the tag in the DICOM dataset
                 if tag_tuple not in self.ds:
                     # Append the missing tag row to the missing_tags DataFrame
