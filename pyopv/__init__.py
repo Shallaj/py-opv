@@ -32,10 +32,6 @@ def read_dicom_directory(directory: str, file_extension: str = '') -> OPVDicomSe
 
     return OPVDicomSet(opvdicoms)
 
-def refresh_dicom_definitions() -> None:
-    """Refresh the DICOM definitions used by PyOPV"""
-
-    pass
 
 def get_dicom_standard():
         # getting most recent version of the parsed DICOM standard
