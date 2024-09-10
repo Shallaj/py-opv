@@ -5,27 +5,25 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pyopv"
 version = "0.1.0"
-description = "This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to csv or json."
+description = "This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON."
 readme = "README.md"
-readme-content-type = "text/markdown"
 authors = [
     { name = "Shahin Hallaj", email = "shallaj@health.ucsd.edu" }
 ]
-license = { file = "LICENSE" } 
+license = { file = "LICENSE" }
 keywords = ["DICOM", "OPV", "CSV", "JSON", "Medical Imaging"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+    "Operating System :: OS Independent"
 ]
 dependencies = [
     "pydicom",
     "numpy",
     "pandas"
 ]
+requires-python = ">=3.6"
 
 [project.urls]
 Homepage = "https://github.com/Shallaj/py_opv"
-Documentation = "https://github.com/Shallaj/py_opv/wiki"
 Source = "https://github.com/Shallaj/py_opv"
-Bug Tracker = "https://github.com/Shallaj/py_opv/issues"
