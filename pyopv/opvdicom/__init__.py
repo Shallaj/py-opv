@@ -11,7 +11,7 @@ class OPVDicom:
     """Class representing a single OPV DICOM file"""
 
     def __init__(self, ds: pydicom.dataset.FileDataset, filename: str = None):
-        self.ds = ds
+        self.ds = pydicom.dcmread(self)
         self.nema_opv_dicom = get_nema_opv_dicom()
         self.filename = filename if filename is not None else '[unnamed file]'
 
@@ -33,9 +33,9 @@ class OPVDicom:
                     ds_str = str(self.ds)
                     tag = row['tag']
 
-                    # Check if the tag is present in the DICOM dataset
+                    # search the long ds_str for the exact tag
                     if tag not in ds_str:
-                        missing_tags = missing_tags.append(row, ignore_index=True)
+                        missing_tags = missing_tags.append(row)
 
                 except ValueError as ve:
                     print(f"Tag parsing error for {row['tag']}: {ve}")
