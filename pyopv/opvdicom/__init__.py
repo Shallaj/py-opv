@@ -11,7 +11,7 @@ class OPVDicom:
     """Class representing a single OPV DICOM file"""
 
     def __init__(self, ds: pydicom.dataset.FileDataset, filename: str = None):
-        self.ds = pydicom.dcmread(self)
+        self.ds = ds
         self.nema_opv_dicom = get_nema_opv_dicom()
         self.filename = filename if filename is not None else '[unnamed file]'
 
@@ -23,27 +23,17 @@ class OPVDicom:
             print(f'SOP Class UID is incorrect in {self.filename}: {self.ds.SOPClassUID}')
             print(f'Expected SOP Class UID: 1.2.840.10008.5.1.4.1.1.80.1')
 
-            # Initialize an empty DataFrame to store missing tags
-            missing_tags = pd.DataFrame(columns=self.nema_opv_dicom.columns)
-
-            # Check if each tag in nema_opv_dicom is present in the DICOM dataset
-            for _, row in self.nema_opv_dicom.iterrows():
-                try:
-                    # Convert self.ds to a string
-                    ds_str = str(self.ds)
-                    tag = row['tag']
-
-                    # search the long ds_str for the exact tag
-                    if tag not in ds_str:
-                        missing_tags = missing_tags.append(row)
-
-                except ValueError as ve:
-                    print(f"Tag parsing error for {row['tag']}: {ve}")
-                except KeyError:
-                    print(f"Tag not found: {row['tag']}")
-                except Exception as e:
-                    print(f"Error processing tag {row['tag']}: {e}")
-
+        # Store the complete ds as a string in a variable
+        ds_str = str(self.ds)
+        
+        # Initialize an empty DataFrame to store missing tags
+        missing_tags = pd.DataFrame(columns=self.nema_opv_dicom.columns)
+    
+        # Check if each tag in nema_opv_dicom is present in ds_str
+        for _, row in self.nema_opv_dicom.iterrows():
+            if row['tag'] not in ds_str:
+                missing_tags = pd.concat([missing_tags, pd.DataFrame([row])], ignore_index=True)
+        
         # Return the count of missing tags and the DataFrame of missing tags
         return len(missing_tags), missing_tags
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyopv"
-version = "0.1.0.8"
+version = "0.1.0.9"
 description = "This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON."
 readme = "README.md"
 authors = [
