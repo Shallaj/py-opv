@@ -3,7 +3,7 @@ import pydicom
 import pandas as pd
 from typing import List, Tuple
 import requests
-
+from pydicom.errors import InvalidDicomError
 from .components import OPVDicomSensitivity
 from .dcm_defs import get_nema_opv_dicom
 
@@ -12,37 +12,62 @@ class OPVDicom:
 
     def __init__(self, ds: pydicom.dataset.FileDataset, filename: str = None):
         self.ds = ds
-        self.nema_opv_dicom = get_nema_opv_dicom()
+        self.nema_opv_dicom = get_nema_opv_dicom()  # Assuming this function provides the DICOM tag dictionary
         self.filename = filename if filename is not None else '[unnamed file]'
 
-    def check_missing_tags(self) -> Tuple[int, pd.DataFrame]:
-        """Check if the DICOM file contains all the required tags, returns number of missing tags and dataframe containing missing tags"""
+    def check_dicom_compliance(self):
+        """
+        Check the DICOM file for missing and incorrect tags from the instance's dataset.
 
-        # Check if the SOP Class UID is correct
-        if self.ds.SOPClassUID != '1.2.840.10008.5.1.4.1.1.80.1':
-            print(f'SOP Class UID is incorrect in {self.filename}: {self.ds.SOPClassUID}')
-            print(f'Expected SOP Class UID: 1.2.840.10008.5.1.4.1.1.80.1')
+        Returns:
+        tuple: Two pandas DataFrames, one for missing tags and one for incorrect tags.
+        """
+        report = {"missing_tags": [], "incorrect_tags": []}
 
-        # Store the complete ds as a string in a variable
-        ds_str = str(self.ds)
-        
-        # Initialize an empty DataFrame to store missing tags
-        missing_tags = pd.DataFrame(columns=self.nema_opv_dicom.columns)
-    
-        # Check if each tag in nema_opv_dicom is present in ds_str
-        for _, row in self.nema_opv_dicom.iterrows():
-            if row['tag'] not in ds_str:
-                missing_tags = pd.concat([missing_tags, pd.DataFrame([row])], ignore_index=True)
-        
-        # Return the count of missing tags and the DataFrame of missing tags
-        return len(missing_tags), missing_tags
+        try:
+            # Iterate through the expected tags in the dictionary
+            for tag_str, tag_info in self.nema_opv_dicom.items():
+                tag_tuple = tuple(int(part, 16) for part in tag_str.strip("()").split(","))
+                
+                # Check if the tag is present in the DICOM dataset
+                if tag_tuple not in self.ds:
+                    tag_info['tag'] = tag_str
+                    report["missing_tags"].append(tag_info)
+                else:
+                    # Validate the tag's value representation (vr)
+                    element = self.ds[tag_tuple]
+                    if element.VR != tag_info["vr"]:
+                        report["incorrect_tags"].append({
+                            "tag": tag_str,
+                            "name": tag_info["name"],
+                            "expected_vr": tag_info["vr"],
+                            "actual_vr": element.VR,
+                            "description": tag_info["description"]
+                        })
 
+                    # Check the value multiplicity (vm), only for list-like objects
+                    if tag_info["vm"] and isinstance(element.value, (list, tuple)):
+                        if len(element.value) != int(tag_info["vm"]):
+                            report["incorrect_tags"].append({
+                                "tag": tag_str,
+                                "name": tag_info["name"],
+                                "error": f"Incorrect VM: {len(element.value)}, expected {tag_info['vm']}",
+                                "description": tag_info["description"]
+                            })
 
+        except InvalidDicomError:
+            return pd.DataFrame({"error": ["The provided file is not a valid DICOM file."]})
+        except Exception as e:
+            return pd.DataFrame({"error": [str(e)]})
 
-    def as_dict(self) -> dict:
-        return {
-            'status': 'not implemented'
-        }
+        # Convert missing tags to DataFrame with all details
+        missing_tags_df = pd.DataFrame(report["missing_tags"])
+
+        # Convert incorrect tags to DataFrame
+        incorrect_tags_df = pd.DataFrame(report["incorrect_tags"])
+
+        return missing_tags_df, incorrect_tags_df
+
     
     def pointwise_to_pandas(self):
         
@@ -109,56 +134,88 @@ class OPVDicom:
         
         return df
 
+import pandas as pd
+from typing import List
+
 class OPVDicomSet:
     """Class representing a set of OPV DICOM files"""
     
     def __init__(self, opvdicoms: List[OPVDicom]):
         self.opvdicoms = opvdicoms
         self.nema_opv_dicom = get_nema_opv_dicom()
-        pass
 
-    def check_missing_tags(self) -> pd.DataFrame:
-        """Check if the DICOM files contain all the required tags, returns Dataframe containing missingness summary for each file"""
-        # Filter the required tags (type contains 1)
-        required_tags = self.nema_opv_dicom[self.nema_opv_dicom['type'].astype(str).str.contains('1')]['tag'].tolist()
+    def check_dicom_compliance(self) -> pd.DataFrame:
+        """
+        Check if the DICOM files contain all the required tags.
+        Returns a DataFrame containing the missingness summary for each file.
+        """
+        # Get the dictionary of required tags from NEMA OPV DICOM definitions
+        opv_dcm_dict = get_nema_opv_dicom()
 
-        # Create an empty DataFrame to store the number of missing tags for each File Name
-        missing_tags_df = pd.DataFrame(columns=['File Name', 'Missing tags Count / Missing DICOM Meta Information Header', 'Number of Missing Required Tags', 'Percentage of Missing Required Tags'])
+        # Convert the nested dictionary to a DataFrame for easy filtering
+        df = pd.DataFrame.from_dict(opv_dcm_dict, orient='index')
+
+        # Filter the rows where the 'type' column contains '1' or '1C' (required or conditionally required)
+        required_tags = df[df['type'].str.contains('1|1C', na=False)]
+
+        # Get the total number of required tags for the calculations
+        total_required_tags = len(required_tags)
+
+        # Initialize an empty DataFrame to store missing tag information for each DICOM file
+        missing_tags_df = pd.DataFrame(columns=[
+            'File Name', 
+            'Missing tags Count / Missing DICOM Meta Information Header', 
+            'Number of Missing Required Tags', 
+            'Percentage of Missing Required Tags'
+        ])
         
-        # Loop through each .dcm file in the directory
+        # Loop through each OPVDicom object in the provided list
         for opvdicom in self.opvdicoms:
             try:
-                # Get the count and list of missing tags
-                missing_count, missing_tags_report = opvdicom.check_missing_tags()
+                # Call the OPVDicom's check_dicom_compliance method to get missing tags for the file
+                missing_tags_report, incorrect_tags_report = opvdicom.check_dicom_compliance()
                 
-                # Find the missing required tags
-                missing_required_count = missing_tags_report[missing_tags_report['tag'].isin(required_tags)].shape[0]
+                # Count the total number of missing tags
+                missing_count = missing_tags_report.shape[0]
+                
+                # Find the number of missing required tags
+                missing_required_count = missing_tags_report[missing_tags_report['tag'].isin(required_tags.index)].shape[0]
                 
                 # Calculate the percentage of missing required tags
-                if len(required_tags) > 0:
-                    missing_required_percentage = round((missing_required_count / len(required_tags)) * 100, 0)
-                else:
-                    missing_required_percentage = 0
+                missing_required_percentage = round((missing_required_count / total_required_tags) * 100, 2) if total_required_tags > 0 else 0
                 
-                # Append the results to the DataFrame
-                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({'File Name': [opvdicom.filename], 
-                                                        'Missing tags Count / Missing DICOM Meta Information Header': [missing_count], 
-                                                        'Number of Missing Required Tags': [missing_required_count], 
-                                                        'Percentage of Missing Required Tags': [missing_required_percentage]})], ignore_index=True)
+                # Append the results for this file to the DataFrame
+                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({
+                    'File Name': [opvdicom.filename], 
+                    'Missing tags Count / Missing DICOM Meta Information Header': [missing_count], 
+                    'Number of Missing Required Tags': [missing_required_count], 
+                    'Percentage of Missing Required Tags': [missing_required_percentage]
+                })], ignore_index=True)
             except pydicom.errors.InvalidDicomError:
-                # Handle the case where DICOM file is missing meta-information header
-                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({'File Name': [opvdicom.filename], 
-                                                        'Missing tags Count / Missing DICOM Meta Information Header': ['File is missing DICOM Meta Information Header'], 
-                                                        'Number of Missing Required Tags': [None], 
-                                                        'Percentage of Missing Required Tags': [None]})], ignore_index=True)
+                # If the file is missing the DICOM meta-information header, we assume all required tags are missing
+                missing_required_percentage = 100  # All tags are missing in this case
+                
+                # Append the error results to the DataFrame with 100% missing tags
+                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({
+                    'File Name': [opvdicom.filename], 
+                    'Missing tags Count / Missing DICOM Meta Information Header': ['File is missing DICOM Meta Information Header'], 
+                    'Number of Missing Required Tags': [total_required_tags],  # All required tags are missing
+                    'Percentage of Missing Required Tags': [missing_required_percentage]
+                })], ignore_index=True)
             except Exception as e:
-                # Handle any other exceptions
-                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({'File Name': [opvdicom.filename], 
-                                                        'Missing tags Count / Missing DICOM Meta Information Header': [str(e)], 
-                                                        'Number of Missing Required Tags': [None], 
-                                                        'Percentage of Missing Required Tags': [None]})], ignore_index=True)
-        
+                # In case of other errors, calculate the number of missing required tags as all missing
+                missing_required_percentage = 100  # Assume all tags are missing in case of an error
+                
+                # Append the error results to the DataFrame
+                missing_tags_df = pd.concat([missing_tags_df, pd.DataFrame({
+                    'File Name': [opvdicom.filename], 
+                    'Missing tags Count / Missing DICOM Meta Information Header': [str(e)], 
+                    'Number of Missing Required Tags': [total_required_tags],  # All required tags are missing
+                    'Percentage of Missing Required Tags': [missing_required_percentage]
+                })], ignore_index=True)
+
         return missing_tags_df
+
     
     def pointwise_to_pandas(self):
         """Convert the OPV DICOM files to a single Pandas DataFrame containing the extracted data"""
