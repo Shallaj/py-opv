@@ -12,7 +12,7 @@ from .opvdicom import OPVDicom, OPVDicomSet
 def read_dicom(path: str) -> OPVDicom:
     """Read a single DICOM file and return a PyOPVDicom object"""
 
-    ds = pydicom.dcmread(path)
+    ds = pydicom.dcmread(path, force=True)
 
     assert isinstance(ds, pydicom.dataset.FileDataset), f"Expected pydicom.dataset.FileDataset, got {type(ds)}"
 

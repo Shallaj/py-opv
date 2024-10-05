@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyopv',
-    version='0.1.1.3',
+    version='0.1.1.4',
     author='Shahin Hallaj, MD',
     author_email='shallaj@health.ucsd.edu',
     description='This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON.',
