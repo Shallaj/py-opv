@@ -6,6 +6,10 @@ import requests
 from pydicom.errors import InvalidDicomError
 from .components import OPVDicomSensitivity
 from .dcm_defs import get_nema_opv_dicom
+import numpy as np
+
+
+
 
 class OPVDicom:
     """Class representing a single OPV DICOM file"""
@@ -67,6 +71,44 @@ class OPVDicom:
         incorrect_tags_df = pd.DataFrame(report["incorrect_tags"])
 
         return missing_tags_df, incorrect_tags_df
+
+    def to_pandas(self):
+        # Initialize a list to hold all data elements
+        df_list = []
+        
+        def process_element(element, parent_name=""):
+            """
+            Processes a single data element, appending it to the df_list. 
+            If the element is a sequence, recursively processes its items.
+
+            Parameters:
+            element (DataElement): The DICOM data element to process.
+            parent_name (str): Name of the parent element, used for nested sequences.
+            """
+            if isinstance(element, pydicom.dataelem.RawDataElement):
+                element = pydicom.dataelem.DataElement_from_raw(element)
+            
+            element_name = f"{parent_name}.{element.name}" if parent_name else element.name
+            df_list.append({'name': element_name, 'value': element.value})
+
+            # Process nested sequences
+            if isinstance(element.value, pydicom.sequence.Sequence):
+                for idx, item in enumerate(element.value):
+                    for nested_element in item:
+                        process_element(nested_element, parent_name=element_name + f"[{idx}]")
+
+        # Process each data element in the dataset
+        for element in self.ds:
+            process_element(element)
+        
+        # Create a DataFrame from the list of data elements
+        df = pd.DataFrame(df_list)
+        df.set_index('name', inplace=True)
+        transpose_df = df.T
+        # transpose_df = transpose_df.iloc[1:]
+
+        return transpose_df
+        
 
     
     def pointwise_to_pandas(self):
@@ -133,6 +175,79 @@ class OPVDicom:
                     'generalized_defect_corrected_sensitivity_probability_values': generalized_defect_corrected_sensitivity_probability_values})
         
         return df
+    
+    def pointwise_to_nested_json(self):        
+            ds = self.ds
+            # Initialize lists to store data
+            person_id = ds.PatientID
+            sop_instance_uid = ds.SOPInstanceUID
+            study_instance_uid = ds.StudyInstanceUID
+            laterality = ds[(0x0020, 0x0060)].value if (0x0020, 0x0060) in ds else ds[(0x0024, 0x0113)].value
+            x_coords = []
+            y_coords = []
+            sensitivity_values = []
+            stimulus_result = []
+            # part of the sequence
+            age_corrected_sensitivity_deviation_values = []
+            age_corrected_sensitivity_deviation_probability_values = []
+            generalized_defect_corrected_sensitivity_deviation_flag = []
+            generalized_defect_corrected_sensitivity_values = []
+            generalized_defect_corrected_sensitivity_probability_values = []
+            
+            # Iterate over the primary sequence
+            for item in ds[(0x0024, 0x0089)].value:
+                x_coords.append(item[(0x0024, 0x0090)].value)
+                y_coords.append(item[(0x0024, 0x0091)].value)
+                stimulus_result.append(item[(0x0024, 0x0093)].value)
+                sensitivity_values.append(item[(0x0024, 0x0094)].value)
+
+                # Access nested sequence
+                nested_sequence = item[(0x0024, 0x0097)].value
+                if nested_sequence:
+                    nested_item = nested_sequence[0]
+                    if (0x0024, 0x0092) in nested_item:
+                        age_corrected_sensitivity_deviation_values.append(nested_item[(0x0024, 0x0092)].value)
+                    else:
+                        age_corrected_sensitivity_deviation_values.append('NaN')
+                    if (0x0024, 0x0100) in nested_item:
+                        age_corrected_sensitivity_deviation_probability_values.append(nested_item[(0x0024, 0x0100)].value)
+                    else:
+                        age_corrected_sensitivity_deviation_probability_values.append('NaN')
+                    if (0x0024, 0x0102) in nested_item:
+                        generalized_defect_corrected_sensitivity_deviation_flag.append(nested_item[(0x0024, 0x0102)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_deviation_flag.append('NaN')
+                    if (0x0024, 0x0103) in nested_item:
+                        generalized_defect_corrected_sensitivity_values.append(nested_item[(0x0024, 0x0103)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_values.append('NaN')
+                    if (0x0024, 0x0104) in nested_item:
+                        generalized_defect_corrected_sensitivity_probability_values.append(nested_item[(0x0024, 0x0104)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_probability_values.append('NaN')
+                else:
+                    age_corrected_sensitivity_deviation_values.append('NaN')
+                    age_corrected_sensitivity_deviation_probability_values.append('NaN')
+                    generalized_defect_corrected_sensitivity_deviation_flag.append('NaN')
+                    generalized_defect_corrected_sensitivity_values.append('NaN')
+                    generalized_defect_corrected_sensitivity_probability_values.append('NaN')
+            # Creating a dataframe
+            df = pd.DataFrame({'person_id': person_id, 'sop_instance_uid': sop_instance_uid,'study_instance_uid':study_instance_uid, 'laterality': laterality, 'x_coords': x_coords, 'y_coords': y_coords, 'stimulus_result': stimulus_result ,'sensitivity_values': sensitivity_values,
+                        'age_corrected_sensitivity_deviation_values': age_corrected_sensitivity_deviation_values,
+                        'age_corrected_sensitivity_deviation_probability_values': age_corrected_sensitivity_deviation_probability_values,
+                        'generalized_defect_corrected_sensitivity_deviation_flag': generalized_defect_corrected_sensitivity_deviation_flag,
+                        'generalized_defect_corrected_sensitivity_values': generalized_defect_corrected_sensitivity_values,
+                        'generalized_defect_corrected_sensitivity_probability_values': generalized_defect_corrected_sensitivity_probability_values})
+            result = {}
+            for person_id, group in df.groupby('person_id'):
+                result[person_id] = {}
+                for laterality, sub_group in group.groupby('laterality'):
+                    result[person_id][laterality] = {}
+                    for sop_instance_uid, sub_sub_group in sub_group.groupby('sop_instance_uid'):
+                        result[person_id][laterality][sop_instance_uid] = sub_sub_group.drop(['person_id', 'laterality', 'sop_instance_uid'], axis=1).to_dict(orient='records')
+            return result
+
+    
 
 import pandas as pd
 from typing import List
@@ -215,8 +330,64 @@ class OPVDicomSet:
                 })], ignore_index=True)
 
         return missing_tags_df
-
     
+    def to_pandas(self):
+        """Convert the OPV DICOM files to a single Pandas DataFrame containing the extracted data, handling duplicate column names"""
+        
+        error_files = []  # List to store files with errors
+        data_frames = []  # List to store DataFrames
+        
+        def make_columns_unique(df):
+            """Ensure that the DataFrame has unique column names by adding suffixes to duplicates"""
+            cols = pd.Series(df.columns)
+            
+            # Find duplicates and append a suffix to make them unique
+            for dup in cols[cols.duplicated()].unique():
+                # Create a suffix iterator to append '_1', '_2', etc.
+                dup_count = cols[cols == dup].index
+                for i, idx in enumerate(dup_count):
+                    if i == 0:
+                        continue  # Keep the first occurrence as is
+                    cols[idx] = f"{dup}_{i+1}"  # Rename subsequent duplicates with suffix
+            
+            df.columns = cols  # Assign back the modified column names
+            return df
+        
+        all_columns = set()  # Collect the union of all column names
+        
+        for opvdicom in self.opvdicoms:
+            try:
+                # Convert individual DICOM to DataFrame, reset the index, and ensure unique column names
+                df = opvdicom.to_pandas().reset_index(drop=True)
+                df = make_columns_unique(df)  # Ensure columns are unique
+                
+                # Update the set of all columns
+                all_columns.update(df.columns)
+                
+                data_frames.append(df)
+            
+            except Exception as e:
+                # Record the file name and error message in case of failure
+                error_files.append({'file_name': opvdicom.filename, 'error': str(e)})
+                continue
+        
+        # Reindex all DataFrames to match the union of all columns, filling missing ones with NaN
+        all_columns = list(all_columns)  # Convert to list for consistent ordering
+        
+        if data_frames:
+            data_frames = [df.reindex(columns=all_columns, fill_value=np.nan) for df in data_frames]
+            result_df = pd.concat(data_frames, ignore_index=True)
+        else:
+            result_df = pd.DataFrame(columns=all_columns)  # Empty DataFrame with all possible columns
+        
+        # Create a DataFrame for error files, even if no errors occurred
+        error_df = pd.DataFrame(error_files, columns=['file_name', 'error'])
+        
+        return result_df, error_df
+
+
+
+
     def pointwise_to_pandas(self):
         """Convert the OPV DICOM files to a single Pandas DataFrame containing the extracted data"""
 
@@ -242,3 +413,88 @@ class OPVDicomSet:
         error_df = pd.DataFrame(error_files)
         
         return result_df, error_df
+    
+    def opvdicoms_pointwise_to_nested_json(self):
+        """Convert the OPV DICOM files to a nested JSON structure"""      
+        nested_json = {}
+        def pointwise_to_nested_json(self):        
+            ds = self.ds
+            # Initialize lists to store data
+            person_id = ds.PatientID
+            sop_instance_uid = ds.SOPInstanceUID
+            study_instance_uid = ds.StudyInstanceUID
+            laterality = ds[(0x0020, 0x0060)].value if (0x0020, 0x0060) in ds else ds[(0x0024, 0x0113)].value
+            x_coords = []
+            y_coords = []
+            sensitivity_values = []
+            stimulus_result = []
+            # part of the sequence
+            age_corrected_sensitivity_deviation_values = []
+            age_corrected_sensitivity_deviation_probability_values = []
+            generalized_defect_corrected_sensitivity_deviation_flag = []
+            generalized_defect_corrected_sensitivity_values = []
+            generalized_defect_corrected_sensitivity_probability_values = []
+            
+            # Iterate over the primary sequence
+            for item in ds[(0x0024, 0x0089)].value:
+                x_coords.append(item[(0x0024, 0x0090)].value)
+                y_coords.append(item[(0x0024, 0x0091)].value)
+                stimulus_result.append(item[(0x0024, 0x0093)].value)
+                sensitivity_values.append(item[(0x0024, 0x0094)].value)
+
+                # Access nested sequence
+                nested_sequence = item[(0x0024, 0x0097)].value
+                if nested_sequence:
+                    nested_item = nested_sequence[0]
+                    if (0x0024, 0x0092) in nested_item:
+                        age_corrected_sensitivity_deviation_values.append(nested_item[(0x0024, 0x0092)].value)
+                    else:
+                        age_corrected_sensitivity_deviation_values.append('NaN')
+                    if (0x0024, 0x0100) in nested_item:
+                        age_corrected_sensitivity_deviation_probability_values.append(nested_item[(0x0024, 0x0100)].value)
+                    else:
+                        age_corrected_sensitivity_deviation_probability_values.append('NaN')
+                    if (0x0024, 0x0102) in nested_item:
+                        generalized_defect_corrected_sensitivity_deviation_flag.append(nested_item[(0x0024, 0x0102)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_deviation_flag.append('NaN')
+                    if (0x0024, 0x0103) in nested_item:
+                        generalized_defect_corrected_sensitivity_values.append(nested_item[(0x0024, 0x0103)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_values.append('NaN')
+                    if (0x0024, 0x0104) in nested_item:
+                        generalized_defect_corrected_sensitivity_probability_values.append(nested_item[(0x0024, 0x0104)].value)
+                    else:
+                        generalized_defect_corrected_sensitivity_probability_values.append('NaN')
+                else:
+                    age_corrected_sensitivity_deviation_values.append('NaN')
+                    age_corrected_sensitivity_deviation_probability_values.append('NaN')
+                    generalized_defect_corrected_sensitivity_deviation_flag.append('NaN')
+                    generalized_defect_corrected_sensitivity_values.append('NaN')
+                    generalized_defect_corrected_sensitivity_probability_values.append('NaN')
+            # Creating a dataframe
+            df = pd.DataFrame({'person_id': person_id, 'sop_instance_uid': sop_instance_uid,'study_instance_uid':study_instance_uid, 'laterality': laterality, 'x_coords': x_coords, 'y_coords': y_coords, 'stimulus_result': stimulus_result ,'sensitivity_values': sensitivity_values,
+                        'age_corrected_sensitivity_deviation_values': age_corrected_sensitivity_deviation_values,
+                        'age_corrected_sensitivity_deviation_probability_values': age_corrected_sensitivity_deviation_probability_values,
+                        'generalized_defect_corrected_sensitivity_deviation_flag': generalized_defect_corrected_sensitivity_deviation_flag,
+                        'generalized_defect_corrected_sensitivity_values': generalized_defect_corrected_sensitivity_values,
+                        'generalized_defect_corrected_sensitivity_probability_values': generalized_defect_corrected_sensitivity_probability_values})
+            result = {}
+            for person_id, group in df.groupby('person_id'):
+                result[person_id] = {}
+                for laterality, sub_group in group.groupby('laterality'):
+                    result[person_id][laterality] = {}
+                    for sop_instance_uid, sub_sub_group in sub_group.groupby('sop_instance_uid'):
+                        result[person_id][laterality][sop_instance_uid] = sub_sub_group.drop(['person_id', 'laterality', 'sop_instance_uid'], axis=1).to_dict(orient='records')
+            return result
+        for opvdicom in self.opvdicoms:
+            try:
+                json_output = pointwise_to_nested_json(opvdicom)
+                # Extract the first key from the JSON output
+                first_key = list(json_output.keys())[0]
+                # Use the first key as the key in the resulting JSON
+                nested_json[first_key] = json_output[first_key]
+            except Exception as e:
+                print(f"Error processing file {opvdicom.filename}: {e}")
+        
+        return nested_json

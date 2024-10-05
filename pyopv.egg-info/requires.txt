@@ -1,3 +1,4 @@
 pydicom
 numpy
 pandas
+requests

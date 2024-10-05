@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyopv',
-    version='0.1.1.0',
-    author='Shahin Hallaj',
+    version='0.1.1.1',
+    author='Shahin Hallaj, MD',
     author_email='shallaj@health.ucsd.edu',
     description='This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON.',
     long_description=open('README.md').read(),
@@ -13,12 +13,13 @@ setup(
     install_requires=[
         'pydicom',
         'numpy',
-        'pandas'
+        'pandas',
+        'requests'
     ],
     classifiers=[
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.8',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 )

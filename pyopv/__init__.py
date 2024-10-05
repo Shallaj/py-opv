@@ -75,8 +75,8 @@ def get_dicom_standard():
         print('Headers:')
         print(opv_attributes.head())
 
-def pointwise_to_nested_json(file_path):        
-        ds=pydicom.dcmread(file_path)
+def pointwise_to_nested_json(self):        
+        ds = self.ds
         # Initialize lists to store data
         person_id = ds.PatientID
         sop_instance_uid = ds.SOPInstanceUID
@@ -147,79 +147,8 @@ def pointwise_to_nested_json(file_path):
         return result
 
 
-def opvdicoms_pointwise_to_nested_json(directory_path):
-    dicom_files = []
-    file_names = []
-    file_paths = []
-    
-    # Iterate through the files in the specified directory
-    for file in os.listdir(directory_path):
-        if file.endswith('.dcm'):
-            try:
-                dicom_file = pydicom.dcmread(os.path.join(directory_path, file))
-                # If the file doesn't have necessary DICOM header attributes, an exception will be raised
-                dicom_files.append(dicom_file)
-                file_names.append(file)
-                file_paths.append(os.path.join(directory_path, file))
-            except Exception as e:
-                print(f"Skipping file {file} due to error: {e}")
-    
-    nested_json = {}
-    for i in range(len(dicom_files)):
-        try:
-            json_output = pointwise_to_nested_json(file_paths[i])
-            # Extract the first key from the JSON output
-            first_key = list(json_output.keys())[0]
-            # Use the first key as the key in the resulting JSON
-            nested_json[first_key] = json_output[first_key]
-        except Exception as e:
-            print(f"Error processing file {file_paths[i]}: {e}")
-    
-    return nested_json
 
-def dicom_to_dataframe(file_path):
-    """
-    Reads a DICOM file and converts it to a Pandas DataFrame with 'name' and 'value' columns,
-    including nested tags.
 
-    Parameters:
-    file_path (str): The path to the DICOM file.
-
-    Returns:
-    pd.DataFrame: A DataFrame with DICOM data elements' names and values, including nested tags.
-    """
-    def process_element(element, df_list):
-        """
-        Processes a single data element, appending it to the df_list. If the element is a sequence,
-        recursively processes its items.
-
-        Parameters:
-        element (DataElement): The DICOM data element to process.
-        df_list (list): The list to append processed data elements to.
-        """
-        if isinstance(element, RawDataElement):
-            element = DataElement_from_raw(element)
-        df_list.append({'name': element.name, 'value': element.value})
-
-        if isinstance(element.value, Sequence):
-            for item in element.value:
-                for nested_element in item:
-                    process_element(nested_element, df_list)
-
-    # Read the DICOM file
-    ds = pydicom.dcmread(file_path)
-
-    # Initialize a list to hold all data elements
-    df_list = []
-
-    # Process each data element in the dataset
-    for element in ds:
-        process_element(element, df_list)
-
-    # Create a DataFrame from the list of data elements
-    df = pd.DataFrame(df_list)
-    transpose_df = df.T
-    return transpose_df
 
 
 
