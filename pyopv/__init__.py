@@ -23,14 +23,18 @@ def read_dicom_directory(directory: str, file_extension: str = '') -> OPVDicomSe
 
     opvdicoms = []
 
-    # Loop through each . file in the directory
+    # Loop through each . file in the directory and if any errors occur, store the error in the errors list and return it
+    errors = []
     for filename in os.listdir(directory):
         if filename.endswith(file_extension):
             file_path = os.path.join(directory, filename)
-            opvdicom = read_dicom(file_path)
-            opvdicoms.append(opvdicom)
+            try:
+                opvdicom = read_dicom(file_path)
+                opvdicoms.append(opvdicom)
+            except Exception as e:
+                errors.append((file_path, str(e)))
 
-    return OPVDicomSet(opvdicoms)
+    return OPVDicomSet(opvdicoms), errors
 
 
 def get_dicom_standard():

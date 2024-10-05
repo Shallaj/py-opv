@@ -72,7 +72,7 @@ from pyopv import OPVDicomSet
 dicom_directory = '/path/to/your/dicom/files'
 
 # Read all the DICOM files in the specified directory
-m_opvdicoms = pyopv.read_dicom_directory(dicom_directory, file_extension='dcm')
+m_opvdicoms, errors = pyopv.read_dicom_directory(dicom_directory, file_extension='dcm')
 
 # Check for missing tags across all files in the directory
 missingtags_df = m_opvdicoms.check_dicom_compliance()
