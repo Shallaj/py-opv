@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyopv
-Version: 0.1.2.0
+Version: 0.1.2.1
 Summary: This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON.
 Home-page: https://github.com/Shallaj/py_opv
 Author: Shahin Hallaj

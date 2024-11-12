@@ -10,64 +10,82 @@ import numpy as np
 
 
 
-
 class OPVDicom:
-    """Class representing a single OPV DICOM file"""
+    """Class representing a single OPV DICOM file."""
 
     def __init__(self, ds: pydicom.dataset.FileDataset, filename: str = None):
         self.ds = ds
-        self.nema_opv_dicom = get_nema_opv_dicom()  # Assuming this function provides the DICOM tag dictionary
-        self.filename = filename if filename is not None else '[unnamed file]'
+        self.nema_opv_dicom = get_nema_opv_dicom()
+        self.filename = filename if filename else "[unnamed file]"
 
     def check_dicom_compliance(self):
         """
-        Check the DICOM file for missing and incorrect tags from the instance's dataset.
+        Check the DICOM file for missing and incorrect tags, searching all nested elements.
 
         Returns:
         tuple: Two pandas DataFrames, one for missing tags and one for incorrect tags.
         """
         report = {"missing_tags": [], "incorrect_tags": []}
 
+        def find_nested_tag(dataset, tag_tuple):
+            """
+            Recursively search for a tag in the dataset, including all nested sequences.
+            """
+            # Base case: If the tag exists in the current dataset
+            if tag_tuple in dataset:
+                return dataset[tag_tuple]
+
+            # Recursive case: Search within sequences
+            for element in dataset:
+                if element.VR == "SQ":  # If the element is a sequence
+                    for item in element.value:  # Iterate through sequence items
+                        if isinstance(item, pydicom.dataset.Dataset):
+                            result = find_nested_tag(item, tag_tuple)
+                            if result:
+                                return result
+            return None
+
         try:
-            # Iterate through the expected tags in the dictionary
             for tag_str, tag_info in self.nema_opv_dicom.items():
                 tag_tuple = tuple(int(part, 16) for part in tag_str.strip("()").split(","))
-                
-                # Check if the tag is present in the DICOM dataset
-                if tag_tuple not in self.ds:
-                    tag_info['tag'] = tag_str
-                    report["missing_tags"].append(tag_info)
+                element = find_nested_tag(self.ds, tag_tuple)
+
+                # Check if the tag exists
+                if element is None:
+                    if tag_info["type"] in ["1", "1C", "2", "2C"]:  # Mandatory types
+                        report["missing_tags"].append({
+                            "tag": tag_str,
+                            "name": tag_info["name"],
+                            "description": tag_info["description"],
+                            "type": tag_info["type"],
+                        })
                 else:
-                    # Validate the tag's value representation (vr)
-                    element = self.ds[tag_tuple]
+                    # Validate the value representation (VR)
                     if element.VR != tag_info["vr"]:
                         report["incorrect_tags"].append({
                             "tag": tag_str,
                             "name": tag_info["name"],
+                            "description": tag_info["description"],
                             "expected_vr": tag_info["vr"],
                             "actual_vr": element.VR,
-                            "description": tag_info["description"]
                         })
 
-                    # Check the value multiplicity (vm), only for list-like objects
-                    if tag_info["vm"] and isinstance(element.value, (list, tuple)):
+                    # Validate the value multiplicity (VM)
+                    if isinstance(element.value, (list, tuple)):
                         if len(element.value) != int(tag_info["vm"]):
                             report["incorrect_tags"].append({
                                 "tag": tag_str,
                                 "name": tag_info["name"],
+                                "description": tag_info["description"],
                                 "error": f"Incorrect VM: {len(element.value)}, expected {tag_info['vm']}",
-                                "description": tag_info["description"]
                             })
 
         except InvalidDicomError:
-            return pd.DataFrame({"error": ["The provided file is not a valid DICOM file."]})
+            return pd.DataFrame({"error": ["The provided file is not a valid DICOM file."]}), pd.DataFrame()
         except Exception as e:
-            return pd.DataFrame({"error": [str(e)]})
+            return pd.DataFrame({"error": [str(e)]}), pd.DataFrame()
 
-        # Convert missing tags to DataFrame with all details
         missing_tags_df = pd.DataFrame(report["missing_tags"])
-
-        # Convert incorrect tags to DataFrame
         incorrect_tags_df = pd.DataFrame(report["incorrect_tags"])
 
         return missing_tags_df, incorrect_tags_df
