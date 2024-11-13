@@ -52,8 +52,7 @@ class OPVDicom:
 
                 # Check if the tag exists
                 if element is None:
-                    if tag_info["type"] in ["1", "1C", "2", "2C"]:  # Mandatory types
-                        report["missing_tags"].append({
+                    report["missing_tags"].append({
                             "tag": tag_str,
                             "name": tag_info["name"],
                             "description": tag_info["description"],
