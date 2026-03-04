@@ -3,6 +3,35 @@
 
 This package provides functionality for working with the OPV DICOM files provided by various vendors. The package facilitates reading, analyzing, and processing these DICOM files for compliance and data extraction. The primary use case is for handling ophthalmology visual field-related DICOM files and ensuring they meet the latest DICOM standards.
 
+## Publication and Citation
+
+PyOPV has been published in the Journal of Glaucoma.
+
+Publication links:
+- DOI: https://doi.org/10.1097/IJG.0000000000002654
+- PubMed: https://pubmed.ncbi.nlm.nih.gov/40044977/
+
+If you use `pyopv` in your research or software, please cite this paper.
+
+Recommended citation (NLM/PubMed format):
+
+Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, Baxter SL. PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management. J Glaucoma. 2026 Mar 1;35(3):150-156. doi:10.1097/IJG.0000000000002654. Epub 2025 Feb 17. PMID: 40044977.
+
+```bibtex
+@article{hallaj2026pyopv,
+  title={PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management},
+  author={Hallaj, Shahin and Boland, Michael V. and Halfpenny, William and Myers, Jonathan S. and Weinreb, Robert N. and Zangwill, Linda M. and Baxter, Sally L.},
+  journal={J Glaucoma},
+  year={2026},
+  month={mar},
+  volume={35},
+  number={3},
+  pages={150--156},
+  doi={10.1097/IJG.0000000000002654},
+  pmid={40044977}
+}
+```
+
 ## Installation
 
 1. Install the package from PyPi:

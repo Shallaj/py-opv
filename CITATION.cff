@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use PyOPV, please cite the publication below."
+title: "PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management"
+type: software
+authors:
+  - family-names: Hallaj
+    given-names: Shahin
+  - family-names: Boland
+    given-names: Michael V.
+  - family-names: Halfpenny
+    given-names: William
+  - family-names: Myers
+    given-names: Jonathan S.
+  - family-names: Weinreb
+    given-names: Robert N.
+  - family-names: Zangwill
+    given-names: Linda M.
+  - family-names: Baxter
+    given-names: Sally L.
+preferred-citation:
+  type: article
+  title: "PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management"
+  journal: "J Glaucoma"
+  year: 2026
+  volume: 35
+  issue: 3
+  start: 150
+  end: 156
+  date-published: 2026-03-01
+  doi: "10.1097/IJG.0000000000002654"
+  identifiers:
+    - type: pmid
+      value: "40044977"

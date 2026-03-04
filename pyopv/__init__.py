@@ -1,3 +1,12 @@
+"""PyOPV public API.
+
+PyOPV publication:
+Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, Baxter SL.
+PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management.
+J Glaucoma. 2026 Mar 1;35(3):150-156. doi:10.1097/IJG.0000000000002654.
+Epub 2025 Feb 17. PMID: 40044977.
+"""
+
 from typing import List
 import pydicom
 import os
@@ -8,6 +17,15 @@ from pydicom.dataelem import RawDataElement
 from pydicom.sequence import Sequence
 
 from .opvdicom import OPVDicom, OPVDicomSet
+
+__paper_doi__ = "10.1097/IJG.0000000000002654"
+__paper_pmid__ = "40044977"
+__citation__ = (
+    "Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, "
+    "Baxter SL. PyOPV: An Open-Source Python Package for Ophthalmic Visual "
+    "Field Data Management. J Glaucoma. 2026 Mar 1;35(3):150-156. "
+    "doi:10.1097/IJG.0000000000002654. Epub 2025 Feb 17. PMID: 40044977."
+)
 
 def read_dicom(path: str) -> OPVDicom:
     """Read a single DICOM file and return a PyOPVDicom object"""
@@ -149,8 +167,6 @@ def pointwise_to_nested_json(self):
                 for sop_instance_uid, sub_sub_group in sub_group.groupby('sop_instance_uid'):
                     result[person_id][laterality][sop_instance_uid] = sub_sub_group.drop(['person_id', 'laterality', 'sop_instance_uid'], axis=1).to_dict(orient='records')
         return result
-
-
 
 
 

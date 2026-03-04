@@ -2,13 +2,16 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyopv',
-    version='0.1.2.2',
+    version='0.1.2.3',
     author='Shahin Hallaj, MD',
     author_email='shallaj@health.ucsd.edu',
     description='This package provides a set of tools for checking OPV DICOM compliance and converting OPV DICOM to CSV or JSON.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/Shallaj/py-opv',
+    project_urls={
+        'Publication': 'https://doi.org/10.1097/IJG.0000000000002654',
+    },
     packages=find_packages(),
     install_requires=[
         'pydicom',
