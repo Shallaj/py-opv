@@ -9,13 +9,12 @@ PyOPV has been published in the Journal of Glaucoma.
 
 Publication links:
 - DOI: https://doi.org/10.1097/IJG.0000000000002654
-- PubMed: https://pubmed.ncbi.nlm.nih.gov/40044977/
 
 If you use `pyopv` in your research or software, please cite this paper.
 
-Recommended citation (NLM/PubMed format):
+Recommended citation (NLM format):
 
-Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, Baxter SL. PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management. J Glaucoma. 2026 Mar 1;35(3):150-156. doi:10.1097/IJG.0000000000002654. Epub 2025 Feb 17. PMID: 40044977.
+Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, Baxter SL. PyOPV: An Open-Source Python Package for Ophthalmic Visual Field Data Management. J Glaucoma. 2026;35(3):150-156. doi:10.1097/IJG.0000000000002654.
 
 ```bibtex
 @article{hallaj2026pyopv,
@@ -27,8 +26,7 @@ Hallaj S, Boland MV, Halfpenny W, Myers JS, Weinreb RN, Zangwill LM, Baxter SL. 
   volume={35},
   number={3},
   pages={150--156},
-  doi={10.1097/IJG.0000000000002654},
-  pmid={40044977}
+  doi={10.1097/IJG.0000000000002654}
 }
 ```
 
